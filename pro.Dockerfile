@@ -1,11 +1,12 @@
-FROM php:5.6.30-apache
+FROM php:5.6.40-apache
 
 LABEL maintainer="Daniel Fernando Lourusso <dflourusso@gmail.com>"
 
-RUN apt-get update && apt-get -y install wget bsdtar libaio1 curl git zlib1g-dev libzip-dev \
-  && wget -qO- https://github.com/paliari/docker-php7-apache/raw/master/oracle/instantclient-basic-linux.x64-12.2.0.1.0.zip | bsdtar -xvf- -C /usr/local \
-  && wget -qO- https://github.com/paliari/docker-php7-apache/raw/master/oracle/instantclient-sdk-linux.x64-12.2.0.1.0.zip | bsdtar -xvf- -C /usr/local \
-  && wget -qO- https://github.com/paliari/docker-php7-apache/raw/master/oracle/instantclient-sqlplus-linux.x64-12.2.0.1.0.zip | bsdtar -xvf- -C /usr/local \
+ADD oracle/instantclient-basic-linux.x64-12.2.0.1.0.tar.gz /usr/local
+ADD oracle/instantclient-sdk-linux.x64-12.2.0.1.0.tar.gz /usr/local
+ADD oracle/instantclient-sqlplus-linux.x64-12.2.0.1.0.tar.gz /usr/local
+
+RUN apt-get update && apt-get -y install libzip-dev \
   && ln -s /usr/local/instantclient_12_2 /usr/local/instantclient \
   && ln -s /usr/local/instantclient/libclntsh.so.* /usr/local/instantclient/libclntsh.so \
   && ln -s /usr/local/instantclient/lib* /usr/lib \
@@ -25,13 +26,12 @@ RUN apt-get update && apt-get -y install wget bsdtar libaio1 curl git zlib1g-dev
   && mkdir -p /var/www/html/public \
   && a2enmod headers rewrite
 
+WORKDIR /var/www/html
 
 COPY apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY apache/charset.conf /etc/apache2/conf-available/charset.conf
-COPY php/vars-pro.ini /usr/local/etc/php/conf.d/vars.ini
 COPY php/timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 COPY src/index.php /var/www/html/public/index.php
+COPY php/vars-pro.ini /usr/local/etc/php/conf.d/vars.ini
 
-WORKDIR /var/www/html
-
-CMD ["apache2-foreground"]
+RUN cp -f "/usr/local/etc/php/php.ini-production" /usr/local/etc/php/php.ini
