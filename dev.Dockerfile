@@ -1,4 +1,4 @@
-FROM paliari/apache-ssl-php56-oci8:1.0.1-pro
+FROM paliari/apache-php56-oci8:1.0.1-pro
 
 COPY php/vars-dev.ini /usr/local/etc/php/conf.d/vars.ini
 
