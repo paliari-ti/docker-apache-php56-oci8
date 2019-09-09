@@ -7,6 +7,7 @@ Docker image PHP 5.6 and Apache
 | Docker Tag | Apache Version | PHP Version | Debian Version |
 |------------|----------------|-------------|----------------|
 | 1.0.1-dev  | 2.4.10         | 5.6.40      | GNU/Linux 8    |
+| 1.0.2-dev  | 2.4.10         | 5.6.40      | GNU/Linux 8    |
 | 1.0.1-pro  | 2.4.10         | 5.6.40      | GNU/Linux 8    |
 
 ### Links
@@ -18,7 +19,7 @@ Docker image PHP 5.6 and Apache
 To pull from docker hub:
 
 ```
-docker pull paliari/apache-php56-oci8:1.0.1-dev
+docker pull paliari/apache-php56-oci8:1.0.2-dev
 ```
 
 ### Running
@@ -26,7 +27,7 @@ docker pull paliari/apache-php56-oci8:1.0.1-dev
 Run the container:
 
 ```
-docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-ssl-php56-oci8:1.0.1-dev
+docker container run -p 80:80 -v $(pwd):/var/www/html -d paliari/apache-ssl-php56-oci8:1.0.2-dev
 ```
 
 Author
