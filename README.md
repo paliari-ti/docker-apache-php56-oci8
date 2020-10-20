@@ -6,6 +6,7 @@ Docker image PHP 5.6 and Apache
 ### Versioning
 | Docker Tag | Apache Version | PHP Version | Debian Version |
 |------------|----------------|-------------|----------------|
+| 1.0.4-dev  | 2.4.10         | 5.6.40      | GNU/Linux 8    |
 | 1.0.3-dev  | 2.4.10         | 5.6.40      | GNU/Linux 8    |
 | 1.0.3-pro  | 2.4.10         | 5.6.40      | GNU/Linux 8    |
 
